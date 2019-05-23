@@ -1,0 +1,21 @@
+  header,main,section,label { display: block; }
+ *{
+  margin: 0px; padding: 0px;
+  font-family: 'Raleway', sans-serif;
+  text-decoration: none;
+  margin: 0px;
+  padding: 0px;
+  font-size: 130%;
+} 
+
+/*index*/
+body {
+  margin-top : 2%;
+  margin-left : 4%;
+
+  
+}
+.form-group{
+    width:30%;
+    background-color:rgb(157, 224, 255);
+}

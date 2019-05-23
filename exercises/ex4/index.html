@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="includes/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+</head>
+<div class="Containers"></div>
+
+<body>
+    <h1>Welcome to Rom form</h1>
+    <form action="http://html5-book.co.il/teach/forms/get_form2.php" method="get" autocomplete="on">
+
+        <label class="FullName">FullName: &nbsp
+            <input type="text" name="fullName" value="" class="form-group" placeholder="Your Full Name" tabindex="1"
+                title="Your Name" autofocus>
+        </label>
+        <label class="Password">Password: &nbsp
+            <input type="password" name="pass" value="" class="form-group" placeholder="Your Password">
+        </label>
+        <label class="Email">Email: &nbsp
+            <input type="email" name="mail" value="" class="form-group" placeholder="Your Email" tabindex="2">
+        </label>
+        <label class="Website">Website: &nbsp
+            <input type="url" name="website" value="" class="form-group" placeholder="Your URL">
+        </label>
+
+        <label class="tel">Phone number: &nbsp
+            <input type="tel" name="phone" value="" maxlength="10" class="form-group" placeholder="Your Phone Number">
+        </label>
+        <label class="coffeeNum">Amount of coffee you drink a day: &nbsp
+            <input type="number" name="coffee" value="0" min="0" class="form-group" placeholder="Your Amount of coffee">
+        </label>
+        <label class="Temperature">Temperature: &nbsp
+            <input type="range" name="temper" value="" class="form-group" id="inputEmail4">
+        </label>
+        <label class="Address">Address: &nbsp
+        <input type="text" name="address" value="" class="form-group" placeholder="Your Address">
+        </label>
+
+    
+        <label >Your hobbies are: &nbsp</label>
+        <div class="custom-control custom-checkbox custom-control-inline">
+        <input type="checkbox" name="interests[] value="movie" class="custom-control-input" id="customCheck1">
+        <label class="custom-control-label" for="customCheck1">movie</label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+        <input type="checkbox" name="interests[] value="sport" class="custom-control-input" id="customCheck2">
+        <label class="custom-control-label" for="customCheck2">sport</label>
+        </div>
+         <div class="custom-control custom-checkbox custom-control-inline">
+        <input type="checkbox" name="interests[] value="Homework" class="custom-control-input" id="customCheck3">
+        <label class="custom-control-label" for="customCheck3"> Homework</label>
+         </div>
+
+        <label for="inputState">Your gender</label>
+        <select name="gender" id="inputState" class="form_control">
+            <option selected>Choose..</option>
+            <option>male</option>
+            <option>Female</option>
+        </select>
+        <label for="inputZip">Age</label>
+        <input type="number" name="age" value="25" min="0" class="form-group" id="inputZip">
+        <label class="sumbit"> <button type="submit" class="btn btn-primary">submit</button></label>
+    </form>
+
+</body>
+</div>
+
+</html>

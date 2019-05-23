@@ -1,0 +1,393 @@
+/*                                  Tal Shalev  neww              general  */
+* {    margin: 0px; padding: 0px;}
+  
+  header,  main, nav,  article, aside,section,  footer { display: block; }
+*  a {
+    text-decoration: none;
+  }
+  header {
+    height: 123px;
+    background-color: #f0e4e4;
+    padding-top: 5px;
+  }
+
+  .clear{
+   clear:both;
+  }
+
+    body {
+    font-family:Arial, Helvetica, sans-serif;
+    font-style: normal;
+  }
+
+  nav{
+   width: 1440px;
+   height: 123px;
+   padding-top: 30px;
+    margin:0 auto;
+ }
+ 
+ nav ul{
+   list-style-type: none;
+   padding-left: 575px;
+ }
+ 
+ nav li{
+   float: left;
+ }
+ 
+ nav a{
+   color: #000000;
+   margin-right: 17px;
+   font-size: 24px;
+ }
+ 
+ nav a:hover{
+   color: rgb(0, 38, 255);
+ }
+ 
+ footer {
+    position: relative;
+    height: 40px;
+    background-color: #000000;
+  }
+
+
+
+/*layout1*/
+.dot1 {
+   margin-left: 585px;
+   height: 20px;
+   width: 20px;
+   background-color: rgb(240, 12, 12);
+   border-radius: 50%;
+   display: inline-block;
+ } 
+  
+  #layout1 main {
+    width: 881px;
+    height: 860px;
+    margin:0 auto;
+  }
+  
+  #layout1 .text{
+    float:left;
+    width: 50%;
+    height: 120px;
+    margin-top: 267px;
+  }
+  
+  
+  #layout1 h1,
+  #layout1 h3{
+    font-weight: bold;
+    line-height: normal;
+    color: #000000;
+    
+  }
+  
+  #layout1 h1{
+    font-size: 72px;
+   letter-spacing: 20px;
+  }
+  
+  #layout1 h3{
+    font-size: 24px;
+  }
+  
+  #boxes div{
+    position: absolute;
+    background-color: #EBEF18;
+  }
+  
+  #boxes{
+    position: relative;
+    top: 0px;
+    left: 0px;
+    float: left;
+    width: 50%;
+    height: 624x;
+    margin-top: 91px;
+  }
+  
+#box1{
+    top: 0px;
+    left: 409px;
+    width: 28px;
+    height: 55px;
+  }
+  
+  #box2{
+      top: 44px;
+      left: 0px;
+      width: 75px;
+      height: 23px;
+    }
+
+    #box3{
+    top: 75px;
+    left: 0px;
+    width: 136px;
+    height: 46px;
+  }
+  
+  #box4{
+    top: 129px;
+    left: 0px;
+    width: 133px;
+    height: 404px;
+  }
+  
+  #box5{
+    top: 541px;
+    left: 0px;
+    width: 88px;
+    height: 28px;
+  }
+  
+  #box6{
+    top: 577px;
+    left: 0px;
+    width: 25px;
+    height: 26px;
+  }
+  
+  #box7{
+    top: 577px;
+    left: 33px;
+    width: 25px;
+    height: 26px;
+  }
+  
+  #box8{
+    top: 44px;
+    left: 149px;
+    width: 246px;
+    height: 352px;
+  }
+  
+  #box9{
+    top: 412px;
+    left: 149px;
+    width: 123px;
+    height: 212px;
+  }
+  
+  #box10{
+    top: 412px;
+    left: 288px;
+    width: 55px;
+    height: 105px;
+  }
+  
+  #box11{
+    top: 525px;
+    left: 288px;
+    width: 110px;
+    height: 58px;
+  }
+  #box12{
+    top: 66px;
+    left: 409px;
+    width: 28px;
+    height: 55px;
+  }
+  
+  #box13{
+    top: 132px;
+    left: 409px;
+    width: 28px;
+    height: 55px;
+  }
+  
+  #box14{
+    top: 198px;
+    left: 409px;
+    width: 28px;
+    height: 198px;
+  }
+  
+  #box15{
+    top: 412px;
+    left: 384px;
+    width: 55px;
+    height: 105px;
+  }
+   /*Layout2*/  
+   .dot2 {
+      margin-left: 670px;
+      height: 20px;
+      width: 20px;
+      background-color: rgb(255, 0, 0);
+      border-radius: 50%;
+      display: inline-block;
+    } 
+    
+#layout2 main{
+   float: left;
+   width: 1440px;
+   height: 1925px;
+}
+
+.boxesleft{
+      float: left;
+      padding-left: 150px;
+       margin-top:  120px;
+      width: 512px;
+      height: 1860px;
+   }
+
+   .boxesright{
+   float: left;
+   padding-left: 55px;
+   margin-top:  287px;
+   }
+
+   .boxesleft div,
+   .boxesright div{
+      position: relative;
+      height: 299px;
+      width: 457px;
+      margin-top: 70px;
+      background: #C4C4C4;
+   }
+   #layout2 aside{
+      float: right;
+      width: 169px;
+      height: 2100px;
+      background-color: #ebef18;
+      margin-top: px;
+    }
+     #layout2 aside ul{
+      text-align: center;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 96px;
+      line-height: 128px;
+      list-style-type: none;
+      margin-top: 1650px;
+     }
+
+     #layout2 footer{
+      position: fixed;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+    }
+
+    #sidebox1{
+      margin-top: 187px;
+       float: left;
+       height: 80px;
+       width: 80px;
+      background-color: #16160e;
+    }
+    #sidebox2{
+      margin-top: 317px;
+      float: right;
+      height: 80px;
+       width: 80px;
+     background-color: #f2f7f8;
+   }
+   #sidebox3{
+      
+    margin-top: 420px;
+    float: left;
+      height: 80px;
+       width: 80px;
+   background-color: #16160e;
+ }
+ 
+ /*Layout3*/  
+ .dot3 {
+    margin-left: 280px;
+    height: 20px;
+    width: 20px;
+    background-color: rgb(240, 12, 12);
+    border-radius: 50%;
+    display: inline-block;
+ } 
+
+#wrapper{
+   margin: 0px auto;
+  }
+ 
+#Makeboxes{
+    height: 80px;
+    width: 80px;
+    float: right;
+        margin-right: 24px;
+    margin-top: 21px;
+    background-color: #000000;
+  }
+.asideLinks{
+    float: left;
+    width: 372px;
+    height: 995px;
+    background: #E5E5E5;
+ }
+.asideLinks ul{
+    margin-top:123px;
+ }
+ 
+.RightBox{
+ 
+ float: right;
+ width: 104px;
+ height: 995px;
+ background: rgba(18, 236, 29, 0.3);
+ }
+ 
+.BottomBox{
+   float: left;
+    width: 100%;
+    height:463px;
+    background-color: rgb(235, 239, 24);
+ 
+ }
+ 
+ #layout3 li{
+  float: left;
+  margin-left: 17px;
+  padding-left: 20px; 
+  list-style-type: none;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 32px;
+ }
+ #layout3 .asideLinks a:hover{
+   color: rgb(20, 52, 225);
+ }
+ 
+ /*  for mobile  */
+ @media (max-width: 690px) {
+   
+   #layout3 .RightBox{
+     background: rgba(179, 77, 10, 0.3);
+          display: none; 
+   }
+
+   #layout3 .asideLinks{
+     width:100%;
+     height: 105px;
+     float: none;
+     padding-top: 1px;
+     
+   }
+   
+   #layout3 .BottomBox{
+     float: left;
+      width: 100%;
+      height:474px;
+      background-color: #EBEF18;
+   
+   }
+   
+   #layout3 .asideLinks ul {
+     margin-top: 40px;
+     margin-left: 130px;
+     
+ }
+}
+ 
