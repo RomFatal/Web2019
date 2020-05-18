@@ -1,0 +1,17 @@
+[{
+  "district":"Sharon",
+  "city":[ "Netanya", "Hadera", "Ra'anana", "Kfar Saba" ]
+ },
+ {
+  "district":"Tel-Aviv",
+  "city":[ "Tel-Aviv", "Herzliya", "Ramat-Gan", "Holon" ]
+ },
+ {
+  "district":"Haifa",
+  "city":[ "Haifa", "Acre", "Nahariyya", "Kiryat Ata" ]
+ },
+ {
+  "district":"South",
+  "city":[ "Dead Sea", "Eilat", "Beer Sheva", "Arad" ]
+ }
+]

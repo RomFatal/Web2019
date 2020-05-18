@@ -1,143 +1,217 @@
 $(document).ready(function () {
-    
-    // getting stationID to parameter
-    function findGetParameter(parameterName) {
-        var result = null,
-            tmp = [];
-        location.search
-            .substr(1)
-            .split("&")
-            .forEach(function (item) {
-                tmp = item.split("=");
-                if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
-            });
-        return result;
-    }
-
-    let stationID = findGetParameter('stationID');
-
-    var json_data = []
-    $.getJSON("data/MOCK_DATA.json", function (data) {
-        json_data = data
-
-        var i;
-        for (i = 0; i < json_data.length; ++i) {
-            if (json_data[i].StationId == stationID) {
-                $('#StationID').attr('value', json_data[i].StationId)
-                $('#StationName').attr('value', json_data[i].StationName)
-                $('#District').attr('value', json_data[i].District)
-                $('#City').attr('value', json_data[i].City)
-                $('#Street').attr('value', json_data[i].Street)
-                $('#Latitude').attr('value', json_data[i].Latitude)
-                $('#Longitude').attr('value', json_data[i].Longitude)
-                $('#Comment').attr('value', json_data[i].Comment)
-
-                if (json_data[i].Smart.SmartScreen == 'True')
-                    $('input[name=Smart1').prop('checked', true)
-                if (json_data[i].Smart.Conditioner == 'True')
-                    $('input[name=Smart2').prop('checked', true)
-                if (json_data[i].Smart.Light == 'True')
-                    $('input[name=Smart3').prop('checked', true)
-                if (json_data[i].Smart.Wifi == 'True')
-                    $('input[name=Smart4').prop('checked', true)
-                break;
-            }
-        }
+    //user logo modal
+    $('#user-logo').click(function () {
+        $('#logout_modal').modal('show')
     });
 
+    //login screen animation
+    $('.message a').click(function () {
+        $('form').animate({
+            height: "toggle",
+            opacity: "toggle"
+        }, "slow");
+    });
+
+    //add options on creating of station
     var json_data = []
-    $.getJSON("data/MOCK_DATA.json", function (data) {
+    $.getJSON("data/STATIONS_DATA.json", function (data) {
         var flag = 0;
         json_data = data
         for (var row of data) {
-            var table_row = $(
-                '<tr>' +
-                '<td>' + row.StationId + '</td>' +
-                '<td>' + row.StationName + '</td>' +
-                '<td>' + row.District + '</td>' +
-                '<td>' + row.City + '</td>' +
-                '<td>' + row.Street + '</td>' +
-                '<td>' + row.Smart.Wifi + '</td>' +
-                '<td>' + row.Comment + '</td>' +
-                '<td>' + '<input type="submit" name="stationID" class="btn btn-success btn-circle" value=' + row.StationId + "></input></td>" +
-                '</tr>'
-            )
-
-            children = District.childNodes;
-            for (var i = 3; i < children.length; i++) {
-                var option = children[i]
-                var district = option.textContent;
-                if (district == row.District)
-                    flag = 1;
-            }
-
-            if (flag == 0) {
-                var optionDist = $('<option>' + row.District + '</option>')
-            }
-
+            var optionDist = $('<option>' + row.district + '</option>')
             $('#District').append(optionDist)
-            $('tbody').append(table_row)
-            flag = 0;
-
-            children = City.childNodes
-            for (var i = 3; i < children.length; i++) {
-                var option = children[i]
-                var city = option.textContent;
-                if (city == row.City)
-                    flag = 1;
-            }
-
-            if (flag == 0) {
-                var optionCity = $(
-                    '<option>' + row.City + '</option>')
-            }
-            $('#City').append(optionCity)
-            $('tbody').append(table_row)
-            flag = 0;
+            row.city.forEach(element => {
+                var optionCity = $('<option>' + element + '</option>')
+                $('#City').append(optionCity)
+            });
         }
+    });
+
+    //make new order modal
+    $('#make_order').on('submit', function (e) {
+        let fromStat = $('.from_class').val();
+        let fromNum = fromStat.substr(fromStat.length - 5);
+        $('#fromID').val(fromNum);
+        let destStat = $('.dest_class').val();
+        let destNum = destStat.substr(destStat.length - 5);
+        $('#destID').val(destNum);
+        e.preventDefault();
+        $.ajax({
+            type: 'get',
+            url: 'order.php',
+            data: $('form').serialize(),
+            success: function (response) {
+                $('.modal-content').html(response);
+                location.reload();
+            }
+        });
+    });
+
+    //acception modal call
+    $('.accept_trip').click(function () {
+        $('#acceptOrder').modal('show');
+        let tripID = parseInt(this.attributes.value.value , 10);
+        $('#tripID').val(tripID);
+    });
+
+
+    //edit station button, enables all inputs and change buttons
+    $('.editStation').click(function () {
+        $('input').each(function () {
+            if ($(this).attr('disabled')) {
+                $(this).removeAttr('disabled');
+            }
+        });
+        $(".card-body").css("background-color", "white");
+        $(".editStation").remove();
+        var saveButton = '<button type="submit" class="btn btn-primary btn-block btn-lg">Save Station</button>';
+        $(".col_of_button").append(saveButton);
+    });
+
+    //live search for stations
+    $('.search-box input[type="text"]').on("keyup input", function () {
+        /* Get input value on change */
+        var inputVal = $(this).val();
+        var resultDropdown = $(this).siblings(".result");
+        if (inputVal.length) {
+            $.get("search.php", {
+                term: inputVal
+            }).done(function (data) {
+                // Display the returned data in browser
+                resultDropdown.html(data);
+            });
+        } else {
+            resultDropdown.empty();
+        }
+    });
+
+    // Set search input value on click of result item
+    $(document).on("click", ".result p", function () {
+        $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
+        $(this).parent(".result").empty();
+    });
+
+    //live search in table
+    $('#table-search').keyup(function () {
+        var searchTerm = $('#table-search').val();
+        var listItem = $('#table tbody').children('tr');
+        var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+
+        $.extend($.expr[':'], {
+            'containsi': function (elem, i, match, array) {
+                return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+            }
+        });
+
+        $("#table tbody tr").not(":containsi('" + searchSplit + "')").each(function (e) {
+            $(this).attr('visible', 'false');
+        });
+
+        $("#table tbody tr:containsi('" + searchSplit + "')").each(function (e) {
+            $(this).attr('visible', 'true');
+        });
 
     });
 
-    function UpdateTable(value, match, parameter = '', parameter2 = '') {
-        for (var row of json_data) {
-            let tmp
-            if (parameter2 == '') {
-                tmp = row[parameter]
-            } else {
-                tmp = row[parameter][parameter2]
+    //live search in table by District
+    $('#District').change(function () {
+        var searchTerm = $('#District').val();
+        var listItem = $('#table tbody').children('tr');
+        var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+
+        $.extend($.expr[':'], {
+            'containsi': function (elem, i, match, array) {
+                return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
             }
-            if (tmp == value || value == "all")
-                match +=
-                '<tr>' +
-                '<td scope="row">' + row.StationId + '</td>' +
-                '<td>' + row.StationName + '</td>' +
-                '<td>' + row.District + '</td>' +
-                '<td>' + row.City + '</td>' +
-                '<td>' + row.Street + '</td>' +
-                '<td>' + row.Smart.Wifi + '</td>' +
-                '<td>' + row.Comment + '</td>' +
-                '<td>' + '<input type="submit" name="stationID" class="btn btn-success btn-circle" value=' + row.StationId + "></input></td>" +
-                '</tr>'
+        });
+
+        $("#table tbody tr").not(":containsi('" + searchSplit + "')").each(function (e) {
+            $(this).attr('visible', 'false');
+        });
+
+        $("#table tbody tr:containsi('" + searchSplit + "')").each(function (e) {
+            $(this).attr('visible', 'true');
+        });
+    });
+
+    $('#City').change(function () {
+        var searchTerm = $('#City').val();
+        var listItem = $('#table tbody').children('tr');
+        var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+
+        $.extend($.expr[':'], {
+            'containsi': function (elem, i, match, array) {
+                return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+            }
+        });
+
+        $("#table tbody tr").not(":containsi('" + searchSplit + "')").each(function (e) {
+            $(this).attr('visible', 'false');
+        });
+
+        $("#table tbody tr:containsi('" + searchSplit + "')").each(function (e) {
+            $(this).attr('visible', 'true');
+        });
+
+    });
+});
+
+
+//deleting station from DB by sending id to delete.php
+function deleteStation(id) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function (id) {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("response").innerHTML = this.responseText;
+            window.location.assign("admin_stations.php");
         }
-        $('tbody').html(match)
-    }
+    };
+    xhttp.open("GET", "delete.php?id=" + id, true);
+    xhttp.send();
+}
 
-    $('#District').on('change', function (e) {
-        UpdateTable(e.target.value, '', 'District');
-    })
+//catching submit form of update of station    
+$(function () {
+    $('#edit_station').on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'get',
+            url: 'update.php',
+            data: $('form').serialize(),
+            success: function (response) {
+                $('.col_of_button').html(response);
+                location.reload();
+            }
+        });
+    });
+});
 
-    $('#City').on('change', function (e) {
-        UpdateTable(e.target.value, '', 'City');
-    })
+//catching submit form of trip maded
+$(function () {
+    $('#finish_order').on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'get',
+            url: 'completed.php',
+            data: $('form').serialize(),
+            success: function (response) {
+                location.reload();
+            }
+        });
+    });
+});
 
-    $('#Smart').on('change', function (e) {
-        UpdateTable(e.target.value, '', 'Smart', 'Wifi');
-    })
-
-    var optionBool = $(
-        '<option>' + 'True' + '</option>' +
-        '<option>' + 'False' + '</option>'
-    )
-    $('#Smart').append(optionBool)
-
+//adding new station via ajax
+$(function () {
+    $('#insert_station').on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'get',
+            url: 'insert.php',
+            data: $('form').serialize(),
+            success: function (response) {
+                window.location.assign("./admin_stations.php");
+            }
+        });
+    });
 });
